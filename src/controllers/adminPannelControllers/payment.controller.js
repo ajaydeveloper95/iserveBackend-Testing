@@ -13,7 +13,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
     if (secureKey !== "80001") {
         return res.status(401).json({ message: "Failed", data: "Unauthorized Access !" })
     }
-    const url = "https://apidev-sdk.iserveu.online/w1w2-payout/w1/cashtransfer";
+    const url = "https://api-prod.txninfra.com/encrV1/w1w2-payout/w1/cashtransfer";
     const passKey = "Fv5S9m79z7rUq0LG7NE4VW4GIICNPaZYPnngonlvdkxNU902";
     const EncKey = "8LWVEmyHYcJZjjB0WW2VQ+YDttzua5BGMnOX66Vi5KE=";
     let HeaderObj = {
