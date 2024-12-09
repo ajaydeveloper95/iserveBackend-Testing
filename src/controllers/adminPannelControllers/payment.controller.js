@@ -51,7 +51,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
     }
 
     // Banking api calling
-    axios.post(url, payoutApiDataSend, postApiOptions).then(async (data) => {
+    await axios.post(url, payoutApiDataSend, postApiOptions).then(async (data) => {
         let bankServerResp = data?.data?.ResponseData
         console.log(data?.data)
         // decrypt the data and send to client;
