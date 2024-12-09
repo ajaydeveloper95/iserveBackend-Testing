@@ -53,12 +53,13 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
     // Banking api calling
     axios.post(url, payoutApiDataSend, postApiOptions).then(async (data) => {
         let bankServerResp = data?.data?.ResponseData
+        console.log(data?.data)
         // decrypt the data and send to client;
         let BodyResponceDec = await AESUtils.decryptRequest(bankServerResp, EncKey);
         let BankJsonConvt = await JSON.parse(BodyResponceDec)
         return res.status(200).json(new ApiResponse(200, BankJsonConvt))
     }).catch((err) => {
-        console.log(err)
+        console.log(err.message)
         return res.status(500).json({ message: "Failed", data: "Internel Server Error !" })
     })
 })
