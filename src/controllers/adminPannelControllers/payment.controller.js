@@ -66,6 +66,34 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
         return res.status(err?.response?.status).json({ message: "Failed", data: errResp })
     })
 })
+
+export const zanithPayGen = asyncHandler(async (req, res) => {
+    let url = "https://api.zanithpay.com/apiAdmin/v1/payin/generatePayment"
+
+    let dd = {
+        userName: "test",
+        authToken: "8420865d22e110ab487847ed0df0e7d89eb1b4a179c20f17a869f589ba8b3b9b",
+        trxId: "ddfdhfghdfgderdd",
+        amount: 1,
+        name: "Vijay",
+        mobileNumber: "8000623206"
+    }
+    let postApiOptions = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    // Banking api calling
+    axios.post(url, dd, postApiOptions).then(async (data) => {
+        // decrypt the data and send to client;
+        return res.status(200).json(new ApiResponse(200, data?.data))
+    }).catch((err) => {
+        let errResp = err?.response?.data
+        console.dir(errResp)
+        return res.status(err?.response?.status).json({ message: "Failed", data: errResp })
+    })
+})
 export const payInCallBack = asyncHandler(async (req, res) => {
     console.log(req.body, "payin CallBack URL")
     res.status(200).json(new ApiResponse(200, req.body))

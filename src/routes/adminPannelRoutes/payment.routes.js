@@ -1,5 +1,5 @@
 import express from "express";
-import { GenTrxIserve, payInCallBack, payInCallBackTest, payOutCallBack, payOutCallBackTest } from "../../controllers/adminPannelControllers/payment.controller.js";
+import { GenTrxIserve, payInCallBack, payInCallBackTest, payOutCallBack, payOutCallBackTest, zanithPayGen } from "../../controllers/adminPannelControllers/payment.controller.js";
 const router = express.Router();
 import multer from "multer";
 const upload = multer();
@@ -17,6 +17,8 @@ router.post("/GenTrx", celebrate({
         amount: Joi.number().required(),
     })
 }), GenTrxIserve);
+router.get("/zanithPayGen", zanithPayGen);
+
 router.post("/payIn", payInCallBack);
 router.post("/payInTest", payInCallBackTest);
 router.post("/payOut", upload.none(), payOutCallBack);
