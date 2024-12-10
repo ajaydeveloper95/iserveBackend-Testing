@@ -21,6 +21,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
         client_secret: "r5kOP0Rdxj4qYjbRFHyUKHetEGTOH1ZaHUgz4p5xqFw3aYxVvGDuFrGcHDKKudFa",
         epoch: String(Date.now())
     }
+
     let BodyObj = {
         beneName: accountHolderName,
         beneAccountNo: accountNumber,
@@ -36,6 +37,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
         custIpAddress: "148.135.138.148",
         beneBankName: bankName,
     }
+
     let headerSecrets = await AESUtils.EncryptRequest(HeaderObj, EncKey)
     let BodyRequestEnc = await AESUtils.EncryptRequest(BodyObj, EncKey)
     let postApiOptions = {
@@ -51,7 +53,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
     }
 
     // Banking api calling
-    await axios.post(url, payoutApiDataSend, postApiOptions).then(async (data) => {
+    axios.post(url, payoutApiDataSend, postApiOptions).then(async (data) => {
         let bankServerResp = data?.data?.ResponseData
         console.log(data?.data)
         // decrypt the data and send to client;
@@ -59,8 +61,9 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
         let BankJsonConvt = await JSON.parse(BodyResponceDec)
         return res.status(200).json(new ApiResponse(200, BankJsonConvt))
     }).catch((err) => {
-        console.log(err.message)
-        return res.status(500).json({ message: "Failed", data: "Internel Server Error !" })
+        let errResp = err?.response?.data
+        console.dir(errResp)
+        return res.status(err?.response?.status).json({ message: "Failed", data: errResp })
     })
 })
 export const payInCallBack = asyncHandler(async (req, res) => {
