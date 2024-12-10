@@ -20,7 +20,7 @@ router.post("/GenTrx", celebrate({
 
 router.get("/zanithPayGen", zanithPayGen);
 
-router.get("/marwarpayGen", marwarpayGen);
+router.post("/marwarpayGen", marwarpayGen);
 
 router.post("/payIn", payInCallBack);
 router.post("/payInTest", payInCallBackTest);
