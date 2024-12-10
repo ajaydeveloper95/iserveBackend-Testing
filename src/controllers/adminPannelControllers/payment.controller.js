@@ -97,7 +97,7 @@ export const zanithPayGen = asyncHandler(async (req, res) => {
 
 export const marwarpayGen = asyncHandler(async (req, res) => {
     const { trxId } = req.body;
-    let url = `https://www.marwarpay.in/portal/api/generateQrAuth?memberid=MPAPI903851&txnpwd=AB23&name=${"vijay"}&amount=${"10"}&txnid=${trxId}`
+    let url = `https://www.marwarpay.in/portal/api/generateQrAuth?memberid=MPAPI903851&txnpwd=AB23&name=${"vijay"}&amount=${"1"}&txnid=${trxId}`
     let postApiOptions = {
         headers: {
             'Content-Type': 'application/json'
