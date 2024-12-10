@@ -34,7 +34,7 @@ export const GenTrxIserve = asyncHandler(async (req, res) => {
         pincode: 302012,
         custName: accountHolderName,
         custMobNo: mobileNumber,
-        custIpAddress: "2a02:4780:12:e1bd::1",
+        custIpAddress: "148.135.138.148",
         beneBankName: bankName,
     }
 
