@@ -94,6 +94,26 @@ export const zanithPayGen = asyncHandler(async (req, res) => {
         return res.status(err?.response?.status).json({ message: "Failed", data: errResp })
     })
 })
+
+export const marwarpayGen = asyncHandler(async (req, res) => {
+    let url = `https://www.marwarpay.in/portal/api/generateQrAuth?memberid=MPAPI903851&txnpwd=AB23&name=${"vijay"}&amount=${"10"}&txnid=${"5465465fdgfdgfd"}`
+    let postApiOptions = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    // Banking api calling
+    axios.get(url, postApiOptions).then(async (data) => {
+        // decrypt the data and send to client;
+        return res.status(200).json(new ApiResponse(200, data?.data))
+    }).catch((err) => {
+        let errResp = err?.response?.data
+        console.dir(errResp)
+        return res.status(err?.response?.status).json({ message: "Failed", data: errResp })
+    })
+})
+
 export const payInCallBack = asyncHandler(async (req, res) => {
     console.log(req.body, "payin CallBack URL")
     res.status(200).json(new ApiResponse(200, req.body))
